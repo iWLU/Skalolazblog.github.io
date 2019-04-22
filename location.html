@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Google Maps Multiple Markers</title> 
+  <link rel="stylesheet" href="css/style.css">
+  <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
+</head> 
+<body>
+  <header>
+  <div class="logo">
+    <div class="logo">
+    <a href="index(blog).html"><img class="graficlogo" src="img/logo2.png" alt="logo"></a>
+    </div>
+  </div>
+  <nav>
+    <div class="topnav" id="myTopnav">
+      <a href="index(blog).html">Блог</a>
+      <a href="about.html">Про мене</a>
+      <a href="location.html">Мапа</a>
+      <a href="contact.html">Зв'язок</a>
+      <!--<a id="menu" href="#" class="icon">&#9776;</a>-->
+    </div>
+  </nav>
+</header>
+  <div id="map"></div>
+<footer>
+  <nav>
+      <a href="index(blog).html">Блог</a>
+      <a href="about.html">Про мене</a>
+      <a href="location.html">Мапа</a>
+      <a href="contact.html">Зв'язок</a>
+  </nav>
+  <div class="logo">
+    <a href="index(blog).html"><img class="graficlogo1" src="img/logo.jpg" alt="logo"></a>
+  </div>
+  <div class="social">
+    <a href="https://mail.google.com/mail/u/0/"><img src="img/em.png" alt="e-mail"></a>
+    <a href="https://www.facebook.com/profile.php?id=100021815264156"><img src="img/face.png" alt="facebook"></a>
+    <a href="https://plus.google.com/?hl=ru"><img src="img/goo.png" alt="google+"></a>
+    <a href="https://www.instagram.com/mountainstyle_/?hl=ru"><img src="img/inst.png" alt="instagram"></a>
+  </div>
+  <p>
+    Skalolaz Blog 2019
+  </p>
+</footer>
+  <script type="text/javascript">
+    var locations = [
+      ['Говерла', 48.160984, 24.499823, 4],
+      ['Монблан', 45.833277, 6.865089, 5],
+      ['Ельбрус', 43.350100, 42.445142, 3],
+      ['Деналі', 63.069633, -151.006984, 2],
+      ['Фудзі', 35.361009, 138.727363, 1]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 2,
+      center: new google.maps.LatLng(48.558121,58.986130),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+</body>
+</html>

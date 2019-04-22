@@ -1,1 +1,0 @@
-# Skalolazblog.github.io
